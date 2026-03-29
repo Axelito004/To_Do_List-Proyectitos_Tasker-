@@ -178,7 +178,7 @@ fetchNotas();
 // =====================================================================
 async function fetchTechNews() {
     // Asegúrate de que este ID coincida con el contenedor en tu HTML
-    const newsContainer = document.getElementById('news-container'); 
+    const newsContainer = document.getElementById('news-list'); 
     
     if (!newsContainer) return;
 
