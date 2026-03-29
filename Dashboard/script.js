@@ -336,3 +336,108 @@ btnLogout.addEventListener('click', async () => {
         btnLogout.innerHTML = '<i class="fa-solid fa-arrow-right-from-bracket"></i> Cerrar Sesión';
     }
 });
+
+// =====================================================================
+// FUNCIÓN PARA CARGAR LOS ÚLTIMOS PROYECTOS (MINI-WIDGET INTERACTIVO)
+// =====================================================================
+async function fetchUltimosProyectos() {
+    const listContainer = document.getElementById('projects-list');
+    if (!listContainer) return;
+
+    listContainer.innerHTML = '<p style="text-align: center; color: #64748b; padding: 10px;"><i class="fa-solid fa-spinner fa-spin"></i> Cargando proyectos...</p>';
+
+    const { data: { session } } = await supabaseClient.auth.getSession();
+    if (!session) return;
+
+    const { data: proyectos, error } = await supabaseClient
+        .from('proyectos')
+        .select('*, tareas (*)')
+        .eq('usuario_id', session.user.id)
+        .order('creado_en', { ascending: false })
+        .limit(4);
+
+    if (error) {
+        console.error("Error al cargar últimos proyectos:", error);
+        listContainer.innerHTML = '<p style="text-align:center; color:#e74c3c;">Error de conexión.</p>';
+        return;
+    }
+
+    listContainer.innerHTML = ''; 
+
+    if (proyectos.length === 0) {
+        listContainer.innerHTML = '<p style="text-align:center; color:#888; font-style: italic; padding: 10px;">No hay proyectos recientes.</p>';
+        return;
+    }
+
+    // Dibujamos los proyectos
+    proyectos.forEach(proj => {
+        const tareas = proj.tareas || [];
+        const total = tareas.length;
+        const completas = tareas.filter(t => t.completada === true).length;
+        const pct = total > 0 ? Math.round((completas / total) * 100) : 0;
+        const color = pct === 100 ? '#27ae60' : '#0984e3';
+
+        // 1. Preparamos el HTML de las tareas en miniatura
+        let tareasHTML = '';
+        if (total === 0) {
+            tareasHTML = '<p style="font-size: 0.8rem; color: #94a3b8; font-style: italic; margin-top: 10px; text-align: center;">Sin tareas asignadas.</p>';
+        } else {
+            tareasHTML = '<ul style="margin-top: 12px; padding-left: 0; list-style: none; border-top: 1px dashed #cbd5e1; padding-top: 10px;">';
+            tareas.forEach(t => {
+                // Iconos visuales dependiendo del estado
+                const icono = t.completada ? '<i class="fa-solid fa-check" style="color: #27ae60;"></i>' : '<i class="fa-regular fa-clock" style="color: #0984e3;"></i>';
+                const tachado = t.completada ? 'line-through' : 'none';
+                const colorTexto = t.completada ? '#94a3b8' : '#475569';
+                
+                tareasHTML += `
+                    <li style="font-size: 0.85rem; color: ${colorTexto}; text-decoration: ${tachado}; margin-bottom: 6px; display: flex; align-items: flex-start; gap: 8px;">
+                        <span style="margin-top: 2px;">${icono}</span> 
+                        <span>${t.descripcion}</span>
+                    </li>`;
+            });
+            tareasHTML += '</ul>';
+        }
+
+        // 2. Creamos la tarjeta del proyecto
+        const li = document.createElement('li');
+        li.style.cssText = `list-style: none; margin-bottom: 12px; background: #f8fafc; padding: 12px; border-radius: 8px; border-left: 4px solid ${color}; box-shadow: 0 1px 3px rgba(0,0,0,0.05); transition: background 0.2s;`;
+        
+        li.innerHTML = `
+            <div class="mini-accordion-header" style="cursor: pointer; user-select: none;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <strong style="color: #1e293b; font-size: 0.95rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 75%;" title="${proj.nombre}">
+                        <i class="fa-solid fa-chevron-right toggle-icon" style="font-size: 0.75rem; color: #64748b; margin-right: 6px; transition: transform 0.2s;"></i>
+                        ${proj.nombre}
+                    </strong>
+                    <span style="font-size: 0.85rem; font-weight: 800; color: ${color};">${pct}%</span>
+                </div>
+                <div style="width: 100%; height: 6px; background: #e2e8f0; border-radius: 3px; overflow: hidden;">
+                    <div style="width: ${pct}%; height: 100%; background: ${color}; transition: width 0.5s ease-out;"></div>
+                </div>
+            </div>
+            
+            <div class="mini-accordion-content" style="display: none;">
+                ${tareasHTML}
+            </div>
+        `;
+
+        // 3. Le inyectamos la interactividad (El Clic)
+        const header = li.querySelector('.mini-accordion-header');
+        const content = li.querySelector('.mini-accordion-content');
+        const icon = li.querySelector('.toggle-icon');
+
+        header.addEventListener('click', () => {
+            const isHidden = content.style.display === 'none';
+            // Alternamos la visibilidad
+            content.style.display = isHidden ? 'block' : 'none';
+            // Rotamos la flechita para dar feedback visual
+            icon.style.transform = isHidden ? 'rotate(90deg)' : 'rotate(0deg)';
+            // Cambiamos un poco el fondo al expandir
+            li.style.background = isHidden ? '#ffffff' : '#f8fafc';
+        });
+
+        listContainer.appendChild(li);
+    });
+}
+
+document.addEventListener('DOMContentLoaded',fetchUltimosProyectos);
