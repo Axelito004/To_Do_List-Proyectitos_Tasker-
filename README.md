@@ -33,8 +33,10 @@ El ecosistema de la aplicación se divide en:
 
 ## 👨‍💻 Desarrollador
 
-**Axel**
+**AXL-HACKING**
 *Estudiante de Ingeniería de Sistemas | UNEFA (Núcleo Yaracuy - San Felipe)*
+
+Tutor - Ing. Josue Ordoñez.
 
 Apasionado por la **ciberseguridad, el hacking ético y el desarrollo de software**. Orientado a la creación de herramientas y soluciones seguras utilizando tecnologías como Kali Linux, Python, C++ y arquitecturas web modernas.
 
