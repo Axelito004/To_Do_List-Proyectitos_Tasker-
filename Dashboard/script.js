@@ -176,17 +176,22 @@ fetchNotas();
 // =====================================================================
 // FUNCIÓN PARA CARGAR NOTICIAS REALES (API DEV.TO)
 // =====================================================================
+// =====================================================================
+// FUNCIÓN PARA CARGAR NOTICIAS REALES (API DEV.TO - ANTI CORS)
+// =====================================================================
 async function fetchTechNews() {
-    // Asegúrate de que este ID coincida con el contenedor en tu HTML
+    // AQUÍ ESTÁ EL CAMBIO: Apuntando exactamente a tu ID "news-list"
     const newsContainer = document.getElementById('news-list'); 
     
-    if (!newsContainer) return;
+    if (!newsContainer) {
+        console.error("No se encontró el contenedor de noticias.");
+        return;
+    }
 
-    newsContainer.innerHTML = '<p style="text-align: center; color: #64748b;"><i class="fa-solid fa-spinner fa-spin"></i> Conectando con la red global...</p>';
+    newsContainer.innerHTML = '<p style="text-align: center; color: #64748b; padding: 20px;"><i class="fa-solid fa-spinner fa-spin"></i> Conectando con la red global...</p>';
 
     try {
-        // Petición a la API de Dev.to (Sin CORS, Sin API Key, 100% compatible con GitHub Pages)
-        // Traemos 3 artículos recientes sobre ciberseguridad
+        // Petición a la API pública de Dev.to (Etiqueta: Ciberseguridad)
         const response = await fetch('https://dev.to/api/articles?tag=cybersecurity&per_page=3');
         
         if (!response.ok) {
@@ -194,17 +199,15 @@ async function fetchTechNews() {
         }
 
         const data = await response.json();
-        newsContainer.innerHTML = ''; // Limpiamos el spinner
+        newsContainer.innerHTML = ''; // Limpiamos el spinner de carga
 
         // Recorremos los artículos reales y los dibujamos
         data.forEach(news => {
             const article = document.createElement('div');
             article.className = 'news-item'; 
             
-            // Estilos en línea para mantener el diseño de tu widget
             article.style.cssText = 'padding: 15px; border-bottom: 1px solid rgba(0,0,0,0.05); margin-bottom: 10px; transition: background 0.2s; border-radius: 8px;';
             
-            // Convertimos la fecha de la API a un formato legible
             const fechaPublicacion = new Date(news.published_at).toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' });
 
             article.innerHTML = `
@@ -212,19 +215,19 @@ async function fetchTechNews() {
                     ${news.title}
                 </h4>
                 <p style="margin: 0 0 12px 0; font-size: 0.9rem; color: #64748b;">
-                    <i class="fa-solid fa-pen-nib"></i> Por ${news.user.name}
+                    <i class="fa-solid fa-terminal"></i> Autor: ${news.user.name}
                 </p>
                 <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem;">
                     <span style="color: #94a3b8; font-weight: 600;">
                         <i class="fa-regular fa-calendar"></i> ${fechaPublicacion}
                     </span>
-                    <a href="${news.url}" target="_blank" style="text-decoration: none; font-weight: 800; color: #1e293b; background: #f1f5f9; padding: 5px 10px; border-radius: 6px; transition: background 0.2s;">
+                    <a href="${news.url}" target="_blank" style="text-decoration: none; font-weight: 800; color: #1e293b; background: #f1f5f9; padding: 6px 12px; border-radius: 6px; transition: background 0.2s;">
                         Leer artículo <i class="fa-solid fa-arrow-right"></i>
                     </a>
                 </div>
             `;
             
-            // Efecto hover sutil para cada noticia
+            // Efecto hover sutil
             article.addEventListener('mouseenter', () => article.style.backgroundColor = '#f8fafc');
             article.addEventListener('mouseleave', () => article.style.backgroundColor = 'transparent');
 
@@ -242,7 +245,7 @@ async function fetchTechNews() {
     }
 }
 
-// Asegurarnos de que arranque cuando cargue la página
+// Arrancar la función al cargar la página
 document.addEventListener('DOMContentLoaded', fetchTechNews);
 
 // --- GUARDIÁN DE SESIÓN (PROTECCIÓN DEL DASHBOARD) ---
