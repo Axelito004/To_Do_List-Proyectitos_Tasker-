@@ -173,56 +173,77 @@ fetchNotas();
 //Fin modulo Notas
 
 
-// --- WIDGET DE NOTICIAS ---
-// --- API DE NOTICIAS TECH (GNews) ---
-// IMPORTANTE: Pega aquí tu API Key de gnews.io
-const GNEWS_API_KEY = '42787019e1c31fef2aea15c0a9e982ae'; 
-
-// Configuramos la URL: categoría tecnología, idioma español, máximo 3 noticias
-const newsUrl = `https://gnews.io/api/v4/top-headlines?category=technology&lang=es&max=3&apikey=${GNEWS_API_KEY}`;
-
+// =====================================================================
+// FUNCIÓN PARA CARGAR NOTICIAS REALES (API DEV.TO)
+// =====================================================================
 async function fetchTechNews() {
-    const newsList = document.getElementById('news-list');
+    // Asegúrate de que este ID coincida con el contenedor en tu HTML
+    const newsContainer = document.getElementById('news-container'); 
     
-    // Mostramos un mensaje de carga mientras llegan los datos
-    newsList.innerHTML = '<div class="news-item"><p><i class="fa-solid fa-spinner fa-spin"></i> Buscando la actualidad tech...</p></div>';
+    if (!newsContainer) return;
+
+    newsContainer.innerHTML = '<p style="text-align: center; color: #64748b;"><i class="fa-solid fa-spinner fa-spin"></i> Conectando con la red global...</p>';
 
     try {
-        const response = await fetch(newsUrl);
-        const data = await response.json();
-
-        // Limpiamos el mensaje de carga
-        newsList.innerHTML = '';
-
-        if (data.articles && data.articles.length > 0) {
-            data.articles.forEach(article => {
-                const div = document.createElement('div');
-                div.className = 'news-item';
-                
-                // Recortamos la descripción si es muy larga
-                const snippet = article.description.length > 100 
-                    ? article.description.substring(0, 100) + '...' 
-                    : article.description;
-
-                // El título ahora es un enlace que abre en una pestaña nueva
-                div.innerHTML = `
-                    <h4><a href="${article.url}" target="_blank" class="news-link">${article.title}</a></h4>
-                    <p>${snippet}</p>
-                    <small>${article.source.name}</small>
-                `;
-                newsList.appendChild(div);
-            });
-        } else {
-            newsList.innerHTML = '<div class="news-item"><p>No hay noticias recientes en este momento.</p></div>';
+        // Petición a la API de Dev.to (Sin CORS, Sin API Key, 100% compatible con GitHub Pages)
+        // Traemos 3 artículos recientes sobre ciberseguridad
+        const response = await fetch('https://dev.to/api/articles?tag=cybersecurity&per_page=3');
+        
+        if (!response.ok) {
+            throw new Error(`Error HTTP: ${response.status}`);
         }
+
+        const data = await response.json();
+        newsContainer.innerHTML = ''; // Limpiamos el spinner
+
+        // Recorremos los artículos reales y los dibujamos
+        data.forEach(news => {
+            const article = document.createElement('div');
+            article.className = 'news-item'; 
+            
+            // Estilos en línea para mantener el diseño de tu widget
+            article.style.cssText = 'padding: 15px; border-bottom: 1px solid rgba(0,0,0,0.05); margin-bottom: 10px; transition: background 0.2s; border-radius: 8px;';
+            
+            // Convertimos la fecha de la API a un formato legible
+            const fechaPublicacion = new Date(news.published_at).toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' });
+
+            article.innerHTML = `
+                <h4 style="margin: 0 0 8px 0; color: #0984e3; font-size: 1.1rem; line-height: 1.3;">
+                    ${news.title}
+                </h4>
+                <p style="margin: 0 0 12px 0; font-size: 0.9rem; color: #64748b;">
+                    <i class="fa-solid fa-pen-nib"></i> Por ${news.user.name}
+                </p>
+                <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem;">
+                    <span style="color: #94a3b8; font-weight: 600;">
+                        <i class="fa-regular fa-calendar"></i> ${fechaPublicacion}
+                    </span>
+                    <a href="${news.url}" target="_blank" style="text-decoration: none; font-weight: 800; color: #1e293b; background: #f1f5f9; padding: 5px 10px; border-radius: 6px; transition: background 0.2s;">
+                        Leer artículo <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+            `;
+            
+            // Efecto hover sutil para cada noticia
+            article.addEventListener('mouseenter', () => article.style.backgroundColor = '#f8fafc');
+            article.addEventListener('mouseleave', () => article.style.backgroundColor = 'transparent');
+
+            newsContainer.appendChild(article);
+        });
+
     } catch (error) {
-        console.error('Error al cargar las noticias:', error);
-        newsList.innerHTML = '<div class="news-item"><p style="color: #e74c3c;">Error de conexión con el servidor de noticias.</p></div>';
+        console.error("Fallo crítico en la API de noticias:", error);
+        newsContainer.innerHTML = `
+            <div style="text-align: center; color: #e74c3c; padding: 20px;">
+                <i class="fa-solid fa-triangle-exclamation" style="font-size: 2rem; margin-bottom: 10px;"></i>
+                <p>Error de conexión con el servidor de noticias.</p>
+            </div>
+        `;
     }
 }
 
-// Llamamos a la función al cargar el dashboard
-fetchTechNews();
+// Asegurarnos de que arranque cuando cargue la página
+document.addEventListener('DOMContentLoaded', fetchTechNews);
 
 // --- GUARDIÁN DE SESIÓN (PROTECCIÓN DEL DASHBOARD) ---
 async function verificarSesion() {
