@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | To Do List</title>
+    <link rel="icon" type="image/png" href="../Recursos/favicon_io/favicon-32x32.png">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+<section class="login_espacio">
+    <div class="container" id="main-container">
+        
+        <div class="container-form">
+            <form id="form-login" class="sign--in">
+                <h2>Iniciar Sesión</h2>
+                <span>Usa tu correo institucional o personal</span>
+
+                <div class="container--input">
+                    <input type="email" id="login-email" placeholder="Email" required>
+                </div>
+
+                <div class="container--input">
+                    <input type="password" id="login-password" placeholder="Contraseña" required>
+                </div>
+
+                <a href="#" id="show-forgot-password">¿Olvidaste tu contraseña?</a>
+                
+                <button type="submit" class="button" id="btn-login">Ingresar</button>
+                
+                <div class="divider"><span>o</span></div>
+                
+                <button type="button" class="btn-google" id="btn-google-login" disabled title="Disponible próximamente">
+                    <i class="fa-brands fa-google"></i> Continuar con Google
+                </button>
+            
+            </form>
+
+            <form id="form-recover" class="sign--in" style="display: none;">
+                <h2>Recuperar</h2>
+                <span>Ingresa tu correo para enviarte un enlace</span>
+
+                <div class="container--input">
+                    <input type="email" id="recover-email" placeholder="Email registrado" required>
+                </div>
+
+                <button type="submit" class="button" id="btn-recover">Enviar enlace</button>
+                <a href="#" id="show-login" style="margin-top: 15px;">Volver al inicio de sesión</a>
+            </form>
+        </div>
+
+        <div class="container-form">
+            <form id="form-register" class="sign--up">
+                <h2>Registrarse</h2>
+                <span>Crea tu cuenta para empezar</span>
+
+                <div class="container--input">
+                    <input type="text" id="reg-nombre" placeholder="Nombre completo" required>
+                </div>
+
+                <div class="container--input">
+                    <input type="text" id="reg-usuario" placeholder="Nombre de Usuario" required>
+                </div>
+
+                <div class="container--input">
+                    <input type="email" id="reg-email" placeholder="Email" required>
+                </div>
+
+                <div class="container--input">
+                    <input type="password" id="reg-password" placeholder="Contraseña (Mínimo 6 caracteres)" minlength="6" required>
+                </div>
+
+                <button type="submit" class="button" id="btn-login">Registrarte</button>
+                
+                <div class="divider"><span>o</span></div>
+                
+                <button type="button" class="btn-google" id="btn-google-login" disabled title="Disponible próximamente">
+                    <i class="fa-brands fa-google"></i> Registrarte con Google
+                </button>
+            </form>
+
+                <button type="submit" class="button" id="btn-register">Registrarte</button>
+            </form>
+        </div>
+
+        <div class="container-welcome">
+            <div class="welcome-sing--up welcome">
+                <h3>¡Hola de nuevo!</h3>
+                <p>Ingresa para continuar gestionando tu entorno de trabajo.</p>
+                <button class="button button-outline" id="btn-sign--up">Crear cuenta</button>
+            </div>
+            <div class="welcome-sing--in welcome">
+				<h3>¡Bienvenido!</h3>
+                <p>Regístrate para organizar tus proyectos, prácticas y auditorías en un solo lugar.</p>
+                <button class="button button-outline" id="btn-sign--in">Iniciar Sesión</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="script.js"></script>
+</body>
+</html>

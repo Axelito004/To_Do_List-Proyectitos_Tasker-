@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre Mí | To Do List</title>
+    <link rel="stylesheet" href="../Dashboard/styles.css">
+    <link rel="stylesheet" href="styles.css"> 
+    <link rel="icon" type="image/png" href="../Recursos/favicon_io/favicon-32x32.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        
+        <aside class="sidebar">
+            <div class="logo">
+                <h2><i class="fa-solid fa-check-double"></i> Proyectitos-Tasker</h2>
+            </div>
+            <div class="user-profile"></div>
+            <nav class="menu">
+                <a href="../Dashboard/index.html"><i class="fa-solid fa-house"></i> Dashboard</a>
+                <a href="../Proyectos/index.html"><i class="fa-solid fa-folder"></i> Proyectos</a>
+                <a href="../Tareas/index.html"><i class="fa-solid fa-list-ul"></i> Tareas</a>
+                <a href="../Visualizar/index.html"><i class="fa-solid fa-eye"></i> Visualizar Proyectos</a>
+                <a href="../Modifcar/index.html"><i class="fa-solid fa-pencil"></i> Modificar Tarea</a>
+                
+                <a href="../Sobre_Mi/index.html" class="active"><i class="fa-solid fa-user-astronaut"></i> Sobre mí</a>
+
+                <div class="sidebar-footer">
+                    <div class="user-profile-bottom" id="user-profile-btn">
+                        <img src="" alt="Avatar del usuario" id="user-avatar" class="avatar-img">
+                        <div class="user-info">
+                            <strong id="user-name">Cargando...</strong>
+                            <span id="user-username">@usuario</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-up"></i>
+                    </div>
+                    
+                    <div class="logout-menu" id="logout-menu">
+                        <button id="btn-logout">
+                            <i class="fa-solid fa-arrow-right-from-bracket"></i> Cerrar Sesión
+                        </button>
+                    </div>
+                </div>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header>
+                <h1>Perfil del Desarrollador</h1>
+            </header>
+
+            <section class="about-section">
+                <div class="about-grid">
+                    
+                    <div class="about-card text-card">
+                        <h3><i class="fa-solid fa-terminal"></i> ¿Quién soy?</h3>
+                        <p>
+                            ¡Hola! Soy Ángel Gustavo, estudiante de 9no semestre <strong>Ingeniería de Sistemas</strong> en la <strong>UNEFA</strong> (Núcleo Yaracuy - San Felipe) y pasante en <strong>FUNDACITE</strong>.
+                        </p>
+                        <p>
+                            A mis 22 años, estoy enfocado en el mundo de la <strong>ciberseguridad, el hacking ético y el desarrollo de software</strong>. Me apasiona trabajar con herramientas como Kali Linux, Python y C++ para crear soluciones reales, como es el caso de este sistema.
+                        </p>
+                        <p>
+                            Y cuando hay que desconectar del código, nada como unas buenas partidas de Need for Speed: Most Wanted o Counter-Strike 1.6.
+                        </p>
+
+                    <p>
+                            Fanático empedernido de mi amado F.C Barcelona, un Boixo Nois más...
+                        </p>
+                        
+                        <a href="https://github.com/axelito004" target="_blank" class="btn-github-guardar">
+                            <i class="fa-brands fa-github"></i> Visita mi GitHub
+                        </a>
+                    </div>
+
+                    <div class="about-card image-card">
+                        <img src="../Recursos/mi_foto.jpg" alt="Foto del Desarrollador">
+                    </div>
+
+                </div>
+            </section>
+
+            <footer class="app-footer">
+                <div class="footer-content">
+                    <p><i class="fa-regular fa-copyright"></i> 2026 Fundación Para el Desarrollo de la Ciencia y la Tecnología (FUNDACITE)</p>
+                    <div class="footer-images">
+                        <img src="../Recursos/Logo1.png" alt="logo_institucional_1">
+                        <img src="../Recursos/Logo2.png" alt="Logo Institucional 2" class="logo_secundario">
+                    </div>
+                </div>
+            </footer>
+        </main>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="script.js"></script>
+</body>
+</html>

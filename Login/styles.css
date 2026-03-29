@@ -1,0 +1,197 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', 'Roboto', sans-serif;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+h2 { font-size: 2.2em; color: #333; }
+h3 { font-size: 2em; }
+p { font-size: 1.1em; line-height: 1.5; }
+
+body {
+    background-color: #f0f4f8; /* Fondo más suave */
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    border-radius: 20px;
+    width: 850px;
+    height: 550px; /* Un poco más alto para que quepa Google */
+    display: flex;
+    position: relative;
+    background-color: white;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.container-form {
+    width: 100%;
+    overflow: hidden;
+}
+
+.container-form form {  
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.6s ease-in-out;
+}
+
+.container-form h2 { margin-bottom: 10px; }
+.container-form span { font-size: 14px; color: #777; margin-bottom: 25px; }
+
+.container--input {
+    border-radius: 8px;
+    width: 320px;
+    height: 45px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+    background-color: #f4f6f9;
+    border: 1px solid #e1e5e9;
+}
+
+.container--input input {
+    border: none;
+    outline: none;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    font-size: 15px;
+}
+
+.container-form a {
+    color: #555;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.container-form a:hover {
+    color: #0984e3;
+}
+
+/* BOTONES */
+.button {
+    width: 320px;
+    height: 45px;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: #0984e3;
+    color: white;
+    transition: background 0.3s;
+}
+
+.button:hover { background-color: #076ab5; }
+
+.button-outline {
+    border: 2px solid white;
+    background-color: transparent;
+    width: 200px;
+}
+
+.button-outline:hover {
+    background-color: white;
+    color: #0984e3;
+}
+
+/* SEPARADOR PARA GOOGLE */
+.divider {
+    width: 320px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    line-height: 0.1em;
+    margin: 25px 0 20px 0;
+}
+.divider span { background:#fff; padding:0 10px; color: #999; }
+
+.btn-google {
+    width: 320px;
+    height: 45px;
+    background-color: white;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: background 0.3s;
+}
+
+.btn-google:hover { background-color: #f4f6f9; }
+.btn-google i { color: #DB4437; font-size: 1.2rem; }
+
+/* Animaciones del Sliding */
+.sign--up { transform: translateX(-100%); }
+.container.toggle .sign--in { transform: translateX(100%); }
+.container.toggle .sign--up { transform: translateX(0); }
+
+.container-welcome {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    background-color: #0984e3; /* Azul del dashboard */
+    display: flex;
+    align-items: center;
+    transform: translateX(100%);
+    justify-content: center;
+    transition: transform 0.6s ease-in-out, border-radius 0.6s;
+    border-radius: 50% 0 0 50%;
+    z-index: 10;
+}
+
+.container-welcome .welcome {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+    padding: 0 40px;
+    color: white;
+    text-align: center;
+    transition: transform 0.6s ease-in-out;
+}
+
+.welcome-sing--in { transform: translateX(100%); }
+
+.container.toggle .welcome-sing--in { transform: translateX(0); }
+.container.toggle .welcome-sing--up { transform: translateX(-100%); }
+
+.container.toggle .container-welcome {
+    transform: translateX(0);
+    border-radius: 0 50% 50% 0;
+}
+
+/* Estado deshabilitado del botón de Google */
+.btn-google:disabled {
+    opacity: 0.6; /* Lo hace ver medio transparente */
+    cursor: not-allowed; /* Cambia el puntero por un símbolo de bloqueo */
+    background-color: #f8f9fa;
+    color: #a0aab2;
+    border-color: #e1e5e9;
+}
+
+/* Ponemos el logo de Google en gris también para que no resalte */
+.btn-google:disabled i {
+    color: #a0aab2;
+}
+

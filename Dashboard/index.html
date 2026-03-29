@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | To Do List</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="../Recursos/favicon_io/favicon-32x32.png">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo">
+                <h2><i class="fa-solid fa-check-double"></i> Proyectitos-Tasker</h2>
+            </div>
+            <div class="user-profile">
+            </div>
+            <nav class="menu">
+                <a href="index.html" class="active"><i class="fa-solid fa-house"></i> Dashboard</a>
+                <a href="../Proyectos/index.html"><i class="fa-solid fa-folder"></i> Proyectos</a>
+                <a href="../Tareas/index.html"><i class="fa-solid fa-list-ul"></i> Tareas</a>
+                <a href="../Visualizar/index.html"><i class="fa-solid fa-eye"></i> Visualizar Proyectos</a>
+                <a href="../Modifcar/index.html"><i class="fa-solid fa-pencil"></i> Modificar Tarea</a>
+                <a href="../Sobre_Mi/index.html"><i class="fa-solid fa-user-astronaut"></i> Sobre mí</a>
+                <div class="sidebar-footer">
+            <div class="user-profile-bottom" id="user-profile-btn">
+                <img src="" alt="Avatar del usuario" id="user-avatar" class="avatar-img">
+                <div class="user-info">
+                    <strong id="user-name">Cargando...</strong>
+                    <span id="user-username">@usuario</span>
+                </div>
+                <i class="fa-solid fa-chevron-up"></i>
+            </div>
+            
+            <div class="logout-menu" id="logout-menu">
+                <button id="btn-logout">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i> Cerrar Sesión
+                </button>
+            </div>
+        </div>
+            </nav>
+            
+    </aside>
+        </aside>
+
+        <main class="main-content">
+            <header>
+                <h1>Resumen de Actividades</h1>
+                <div class="time-widget" id="clock">00:00:00</div>
+            </header>
+
+            <div class="dashboard-grid">
+                <section class="widget projects-widget">
+                    <h3><i class="fa-solid fa-folder-open"></i> Últimos Proyectos</h3>
+                    <ul id="projects-list">
+                        </ul>
+                </section>
+
+                <section class="widget notes-widget">
+                    <h3><i class="fa-solid fa-pen"></i> Escribir Nota</h3>
+                    
+                    <div class="note-input-container">
+                        <textarea id="new-note-input" maxlength="125" placeholder="Escribe tus ideas aquí..."></textarea>
+                        <div class="char-counter" id="char-counter">0 / 125</div>
+                    </div>
+                    
+                    <button id="save-note-btn"><i class="fa-solid fa-plus"></i> Guardar</button>
+                </section>
+
+                <section class="widget calendar-widget">
+                    <div class="calendar-header">
+                        <h3 id="month-year">Mes Año</h3>
+                    </div>
+                    <div class="calendar-body">
+                        <div class="calendar-day-name" id="day-name">Día</div>
+                        <div class="calendar-date" id="date-number">00</div>
+                    </div>
+                </section>
+
+                <section class="widget saved-notes-widget">
+                    <h3><i class="fa-regular fa-note-sticky"></i> Últimas Notas</h3>
+                    <div id="saved-notes-list" class="saved-notes-container">
+                        </div>
+                </section>
+
+                <section class="widget news-widget">
+                    <h3><i class="fa-solid fa-newspaper"></i> Actualidad</h3>
+                    <div class="news-container-vertical" id="news-list">
+                        </div>
+                </section>
+            </div>
+            <footer class="app-footer">
+                <div class="footer-content">
+                    <p><i class="fa-regular fa-copyright"></i> 2026 Fundación Para el Desarrollo de la Ciencia y la Tecnología (FUNDACITE)</p>
+                    
+                    <div class="footer-images">
+                        <img src="../Recursos/Logo1.png" alt="logo_onstitucional_1">
+                        <img src="../Recursos/Logo2.png" alt="Logo Institucional 2" class="logo_secundario">
+                        
+                    </div>
+
+                </div>
+                <p><i class=""></i> Desarrollado por: Ángel Gustavo Castillo Giménez</p>
+            </footer>
+        </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="script.js"></script>
+    
+</body>
+</html>

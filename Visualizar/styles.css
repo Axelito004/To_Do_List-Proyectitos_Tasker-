@@ -1,0 +1,894 @@
+:root {
+    --bg-color: #f4f7f6;
+    --sidebar-bg: #ffffff;
+    --widget-bg: #ffffff;
+    --text-main: #2d3436;
+    --text-muted: #636e72;
+    --accent: #0984e3;
+    --border-radius: 16px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    height: 100vh;
+    display: flex;
+}
+
+.app-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+/* --- Barra Lateral --- */
+.sidebar {
+    width: 250px;
+    background-color: var(--sidebar-bg);
+    padding: 2rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid #e1e5e9;
+}
+
+.logo h2 {
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 1rem;
+}
+
+.user-profile {
+    margin-bottom: 2.5rem;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #e1e5e9;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.menu a {
+    text-decoration: none;
+    color: var(--text-muted);
+    font-weight: 400;
+    padding: 0.8rem 1rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.menu a:hover, .menu a.active {
+    background-color: var(--accent);
+    color: white;
+}
+
+/* --- Contenido Principal --- */
+.main-content {
+    flex: 1;
+    padding: 2rem 3rem;
+    overflow-y: auto;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2.5rem;
+}
+
+
+
+#projects-list li {
+    padding: 1rem;
+    background-color: var(--bg-color);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    border-left: 4px solid var(--accent);
+}
+
+/* --- Notas (Escribir) --- */
+.notes-widget textarea {
+    flex: 1;
+    min-height: 100px;
+    border: none;
+    resize: none;
+    background-color: var(--bg-color);
+    padding: 1rem;
+    border-radius: 8px;
+    outline: none;
+    color: var(--text-main);
+    margin-bottom: 1rem;
+}
+
+#save-note-btn {
+    background-color: var(--accent);
+    color: white;
+    border: none;
+    padding: 0.8rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+
+#save-note-btn:hover {
+    background-color: #076ab5;
+}
+
+/* --- Notas Guardadas --- */
+.saved-notes-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+.saved-note {
+    background-color: var(--bg-color);
+    padding: 1rem;
+    border-radius: 8px;
+    border-left: 4px solid #f1c40f;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+/* --- Calendario Mini --- */
+.calendar-widget {
+    text-align: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--accent), #74b9ff);
+    color: white;
+}
+
+.calendar-widget h3 { color: white; margin-bottom: 0.5rem; justify-content: center; }
+.calendar-date { font-size: 4rem; font-weight: 600; line-height: 1; }
+.calendar-day-name { font-size: 1.2rem; text-transform: uppercase; letter-spacing: 2px; margin-top: 1rem; }
+
+/* --- Noticias Verticales --- */
+.news-container-vertical {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+.news-item {
+    background-color: var(--bg-color);
+    padding: 1rem;
+    border-radius: 8px;
+    border-left: 4px solid var(--accent);
+}
+
+/* --- FOOTER INSTITUCIONAL --- */
+.app-footer {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e1e5e9;
+    color: var(--text-muted);
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.footer-content p {
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.footer-images {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.footer-images img {
+    height: 65px;
+    width: auto;
+    object-fit: contain;
+    
+    /* --- EL TRUCO PARA EL BORDE NEGRO EN PNG BLANCO --- */
+    /* Creamos una sombra negra muy dura de 1px en todas direcciones */
+    filter: drop-shadow(1px 0 0 var(--accent)) 
+            drop-shadow(-1px 0 0 var(--accent)) 
+            drop-shadow(0 1px 0 var(--accent)) 
+            drop-shadow(0 -1px 0 var(--accent));
+            
+    opacity: 0.35; /* Ligeramente transparente por defecto */
+    transition: all 0.3s ease;
+}
+
+.footer-images img.logo_secundario {
+    height: 200px;
+    align-items: right;
+}
+
+.footer-images img:hover {
+    opacity: 1; /* Totalmente opaco al pasar el mouse */
+    /* Opcional: podrías quitar el borde al hacer hover */
+    /* filter: none; */
+}
+
+.news-item h4 { font-size: 0.9rem; margin-bottom: 0.5rem; color: var(--text-main); }
+.news-item p { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.5rem; }
+.news-item small { font-size: 0.75rem; color: var(--accent); font-weight: 600; }
+
+/* =========================================
+ESTILOS PARA VISUALIZAR PROYECTOS (ACORDEÓN)
+========================================= */
+
+.accordion-widget {
+    padding: 0; /* Quitamos padding para que fluya mejor */
+    background: transparent;
+    box-shadow: none;
+}
+
+.accordion-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+/* Cada tarjeta de proyecto */
+.accordion-item {
+    background-color: var(--widget-bg);
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    overflow: hidden;
+    border: 1px solid #e1e5e9;
+}
+
+/* Cabecera del proyecto (donde se hace clic) */
+.accordion-header {
+    padding: 1.2rem 1.5rem;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    background-color: var(--widget-bg);
+    transition: background-color 0.2s;
+    user-select: none;
+}
+
+.accordion-header:hover {
+    background-color: #fafbfc;
+}
+
+/* Icono de la flecha */
+.accordion-icon {
+    margin-right: 1rem;
+    color: var(--accent);
+    transition: transform 0.3s ease;
+    font-size: 1.1rem;
+}
+
+/* Cuando el acordeón está abierto, la flecha gira hacia abajo */
+.accordion-item.active .accordion-icon {
+    transform: rotate(90deg);
+}
+
+.accordion-title {
+    font-weight: 600;
+    color: var(--text-main);
+    font-size: 1.05rem;
+}
+
+/* Contenedor de las tareas (oculto por defecto) */
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    background-color: #fafbfc;
+}
+
+/* Lista de tareas (Checklist) */
+.task-checklist {
+    list-style: none;
+    padding: 1rem 1.5rem 1.5rem 3.5rem; /* Margen izquierdo para alinear con el título */
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    border-top: 1px solid #f0f0f0;
+}
+
+.task-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Estilo del Checkbox nativo */
+.task-item input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: var(--accent); /* Cambia el color nativo azul por tu color accent */
+}
+
+/* Etiqueta de la tarea */
+.task-item label {
+    cursor: pointer;
+    color: var(--text-main);
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+}
+
+/* EL TRUCO DEL TACHADO: Si el input está checked, su label adyacente se tacha */
+.task-item input[type="checkbox"]:checked + label {
+    text-decoration: line-through;
+    color: #a0aab2; /* Un gris más claro para que parezca inactiva */
+}
+
+/* Contenedor del botón guardar */
+.update-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* =========================================
+CORRECCIÓN: BOTÓN DE ACTUALIZAR PROYECTOS
+========================================= */
+
+.update-container button {
+    background-color: var(--accent);
+    color: white;
+    border: none;
+    padding: 0.9rem 1.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: background 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Inter', sans-serif;
+}
+
+.update-container button:hover {
+    background-color: #076ab5;
+}
+
+/* =========================================
+FECHAS EN EL ACORDEÓN DE PROYECTOS
+========================================= */
+
+.accordion-dates {
+    margin-left: auto; /* Empuja las fechas hacia la derecha */
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    font-weight: 400;
+}
+
+.accordion-dates i {
+    color: var(--accent); /* Pinta los iconos del calendario de azul */
+    margin: 0 4px 0 8px;
+}
+
+/* =========================================
+CORRECCIÓN: TEXTO DE LA BARRA LATERAL
+========================================= */
+
+/* Aumentamos un poquito el ancho de la barra para que quepan textos largos */
+.sidebar {
+    width: 280px; 
+}
+
+/* Evitamos que el texto de los botones salte a la segunda línea */
+.menu a {
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; /* Agrega "..." al final si la pantalla es muy pequeña */
+}
+
+.sidebar-footer {
+    margin-top: auto; /* Empuja esto hacia abajo */
+    padding-top: 1rem;
+    border-top: 1px solid #e1e5e9;
+    position: relative;
+}
+/* Forzar estilo a las cajas de texto que no lo tomaron */
+.task-form-widget input[type="text"] {
+    width: 100%;
+    padding: 0.9rem 1rem;
+    border: 1px solid #e1e5e9;
+    border-radius: 8px;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.task-form-widget input[type="text"]:focus {
+    border-color: var(--accent);
+}
+
+/* 2. Arreglo de los encabezados de la tabla */
+.projects-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.projects-table th, 
+.projects-table td {
+    padding: 1.2rem 1.5rem; /* Este padding es el que separa el texto */
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.projects-table th {
+    background-color: #fafbfc;
+    color: var(--text-muted);
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap; /* Evita que el texto de la cabecera se rompa en varias líneas */
+}
+
+/* 3. Arreglo del Botón Deshabilitado */
+.btn-primary {
+    background-color: var(--accent);
+    color: white;
+    border: none;
+    padding: 0.9rem 1.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: background 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.submit-container button:disabled {
+    background-color: #a0c4ff; /* Azul opaco */
+    color: #ffffff; /* Forzamos el texto blanco */
+    border: none;
+    cursor: not-allowed;
+    opacity: 0.8;
+}
+
+.user-profile-bottom {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.user-profile-bottom:hover {
+    background-color: #f0f4f8;
+}
+
+.avatar-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%; /* Lo hace un círculo perfecto */
+    background-color: #e1e5e9;
+    object-fit: cover;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    flex: 1; /* Ocupa el espacio restante */
+    overflow: hidden;
+}
+
+.user-info strong {
+    font-size: 0.9rem;
+    color: var(--text-main);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.user-info span {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.user-profile-bottom i {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+}
+
+/* El menú flotante oculto por defecto */
+.logout-menu {
+    display: none; /* Se oculta con CSS y se muestra con JS */
+    position: absolute;
+    bottom: 70px; /* Sube por encima del perfil */
+    left: 0;
+    width: 100%;
+    background: white;
+    border: 1px solid #e1e5e9;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    overflow: hidden;
+    z-index: 100;
+}
+
+.logout-menu.show {
+    display: block; /* Clase para activarlo */
+}
+
+#btn-logout {
+    width: 100%;
+    background: transparent;
+    border: none;
+    padding: 12px 15px;
+    text-align: left;
+    color: #e74c3c; /* Rojo alerta */
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: background 0.2s;
+}
+
+#btn-logout:hover {
+    background: #fdf3f2;
+}
+
+/* --- ESTILOS DEL ACORDEÓN (EL ARREGLO) --- */
+.accordion-item {
+    background: white;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #e1e8ed;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.accordion-header {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between; /* Esto separa el nombre del porcentaje */
+    align-items: center;
+    cursor: pointer;
+    background: #ffffff;
+    transition: background 0.3s;
+}
+
+.accordion-header:hover {
+    background: #f8fafc;
+}
+
+.header-info, .header-progress {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Barra de progreso real */
+.mini-progress-bg {
+    width: 100px;
+    height: 8px;
+    background: #edf2f7;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.mini-progress-fill {
+    height: 100%;
+    transition: width 0.5s ease-in-out;
+}
+
+/* LA CLAVE DE LA INTERACCIÓN */
+.accordion-content {
+    max-height: 0; /* Oculto por defecto */
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    background: #fcfdfe;
+    padding: 0 20px; /* Padding lateral solamente mientras está cerrado */
+}
+
+.accordion-item.active .accordion-content {
+    max-height: 500px; /* Se abre al tener la clase active */
+    padding: 20px;
+    border-top: 1px solid #edf2f7;
+}
+
+/* Estilo de los badges de estado */
+.status-badge {
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+/* --- TARJETAS MÁS GRANDES --- */
+.accordion-item {
+    margin-bottom: 25px; /* Más espacio entre tarjetas */
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.accordion-header {
+    padding: 30px; /* Aumentamos el "aire" interno */
+}
+
+.accordion-header strong {
+    font-size: 1.4rem; /* Nombre del proyecto más imponente */
+    color: #2d3436;
+}
+
+/* --- ESTILO DE CHECKBOXES MODERNOS --- */
+.task-row {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    margin-bottom: 8px;
+    background: #f8fafc;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.task-row:hover {
+    background: #f1f5f9;
+}
+
+/* Ocultamos el checkbox real y creamos uno visual */
+.task-check {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 22px;
+    height: 22px;
+    border: 2px solid #cbd5e1;
+    border-radius: 6px;
+    background: white;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s;
+}
+
+.task-check:checked {
+    background-color: #0984e3; /* Tu azul */
+    border-color: #0984e3;
+}
+
+/* El "check" blanco dentro del cuadro */
+.task-check:checked::after {
+    content: '\f00c'; /* Icono de FontAwesome */
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    font-size: 12px;
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.task-text {
+    font-size: 1.05rem;
+    color: #475569;
+}
+
+.strikethrough {
+    text-decoration: line-through;
+    color: #94a3b8 !important;
+}
+
+/* --- ESTILOS DEL ACORDEÓN (EL ARREGLO) --- */
+.accordion-item {
+    background: white;
+    border-radius: 12px;
+    margin-bottom: 25px; /* Más espacio entre tarjetas */
+    border: 1px solid #e1e8ed;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08); /* Sombra más pronunciada para darle "peso" */
+}
+
+.accordion-header {
+    padding: 30px; /* Aumentamos el "aire" interno para que sea más imponente */
+    display: flex;
+    justify-content: space-between; /* LA CLAVE: Separa el nombre (izquierda) del porcentaje (derecha) */
+    align-items: center;
+    cursor: pointer;
+    background: #ffffff;
+    transition: background 0.3s;
+}
+
+.accordion-header:hover {
+    background: #f8fafc;
+}
+
+.accordion-header strong {
+    font-size: 1.4rem; /* Nombre del proyecto más grande */
+    color: #2d3436;
+}
+
+.header-info, .header-progress {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Barra de progreso visual (la que antes no salía) */
+.mini-progress-bg {
+    width: 100px;
+    height: 8px;
+    background: #edf2f7;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.mini-progress-fill {
+    height: 100%;
+    transition: width 0.5s ease-in-out;
+}
+
+/* LA CLAVE DE LA INTERACCIÓN */
+.accordion-content {
+    max-height: 0; /* Oculto por defecto */
+    overflow: hidden;
+    transition: max-height 0.3s ease-out; /* Animación suave al abrir */
+    background: #fcfdfe;
+    padding: 0 20px; /* Padding lateral solamente mientras está cerrado */
+}
+
+.accordion-item.active .accordion-content {
+    max-height: 1000px; /* Se abre al tener la clase active */
+    padding: 20px;
+    border-top: 1px solid #edf2f7;
+}
+
+/* Estilo de los badges de estado */
+.status-badge {
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+/* --- ESTILO DE CHECKBOXES MODERNOS (Tu TOC visual) --- */
+.task-row {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    margin-bottom: 8px;
+    background: #f8fafc;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.task-row:hover {
+    background: #f1f5f9;
+}
+
+/* Ocultamos el checkbox real y creamos uno visual */
+.task-check {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 22px;
+    height: 22px;
+    border: 2px solid #cbd5e1;
+    border-radius: 6px;
+    background: white;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s;
+}
+
+.task-check:checked {
+    background-color: #0984e3; /* Tu azul widgets */
+    border-color: #0984e3;
+}
+
+/* El "check" blanco dentro del cuadro */
+.task-check:checked::after {
+    content: '\f00c'; /* Icono de FontAwesome 'check' */
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    font-size: 12px;
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.task-text {
+    font-size: 1.05rem;
+    color: #475569;
+}
+
+.strikethrough {
+    text-decoration: line-through;
+    color: #94a3b8 !important;
+}
+
+/* El contenido empieza oculto */
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+}
+
+/* Cuando el padre tiene la clase 'active', se muestra */
+.accordion-item.active .accordion-content {
+    max-height: 1000px; /* Un valor alto para que quepan muchas tareas */
+    padding: 15px;
+}
+
+/* =========================================
+   DISEÑO DE CHECKBOXES PERSONALIZADOS
+========================================= */
+
+/* 1. Ocultar el diseño por defecto del navegador */
+.custom-checkbox {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 24px;
+    height: 24px;
+    border: 2px solid #94a3b8;
+    border-radius: 6px;
+    background-color: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s ease;
+    flex-shrink: 0; /* Para que no se aplaste si el texto es muy largo */
+}
+
+/* 2. Efecto al pasar el mouse (Hover) */
+.custom-checkbox:hover {
+    border-color: #0984e3;
+    box-shadow: 0 0 8px rgba(9, 132, 227, 0.3);
+}
+
+/* 3. Diseño cuando está marcado (Checked) */
+.custom-checkbox:checked {
+    background-color: #0984e3;
+    border-color: #0984e3;
+}
+
+/* 4. Dibujar la "palomita" (check) usando FontAwesome */
+.custom-checkbox:checked::after {
+    content: '\f00c'; /* Código del check de FontAwesome */
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    color: white;
+    font-size: 14px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Efecto hover suave para la fila de la tarea */
+.accordion-content label:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+}

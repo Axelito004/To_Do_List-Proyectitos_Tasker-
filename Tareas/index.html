@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tareas | To Do List</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="../Recursos/favicon_io/favicon-32x32.png">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo">
+                <h2><i class="fa-solid fa-check-double"></i> Proyectitos-Tasker</h2>
+            </div>
+            <div class="user-profile">
+                <p>Hola, <strong>axelito004</strong></p>
+            </div>
+            <nav class="menu">
+                <a href="../Dashboard/index.html"><i class="fa-solid fa-house"></i> Dashboard</a>
+                <a href="../Proyectos/index.html"><i class="fa-solid fa-folder"></i> Proyectos</a>
+                <a href="index.html" class="active"><i class="fa-solid fa-list-ul"></i> Tareas</a>
+                <a href="../Visualizar/index.html"><i class="fa-solid fa-eye"></i> Visualizar Proyectos</a>
+                <a href="../Modifcar/index.html"><i class="fa-solid fa-pencil"></i> Modificar Tarea</a>
+                <a href="../Sobre_Mi/index.html"><i class="fa-solid fa-user-astronaut"></i> Sobre mí</a>
+                <div class="sidebar-footer">
+            <div class="user-profile-bottom" id="user-profile-btn">
+                <img src="" alt="Avatar del usuario" id="user-avatar" class="avatar-img">
+                <div class="user-info">
+                    <strong id="user-name">Cargando...</strong>
+                    <span id="user-username">@usuario</span>
+                </div>
+                <i class="fa-solid fa-chevron-up"></i>
+            </div>
+            
+            <div class="logout-menu" id="logout-menu">
+                <button id="btn-logout">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i> Cerrar Sesión
+                </button>
+            </div>
+        </div>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header>
+                <h1>Registro de Tareas</h1>
+            </header>
+
+            <section class="widget task-form-widget">
+                <div class="form-row">
+                    <div class="input-group" style="flex: 1;">
+                        <label for="project-select"><i class="fa-solid fa-folder-tree"></i> Seleccionar Proyecto</label>
+                        <select id="project-select" class="custom-select">
+                            <option value="">-- Elige un proyecto --</option>
+                            </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="input-group name-input">
+                        <label for="task-input"><i class="fa-solid fa-thumbtack"></i> Nueva Tarea</label>
+                        <input type="text" id="task-input" placeholder="Ej. Redactar objetivos específicos del módulo...">
+                    </div>
+                    <button id="add-task-btn" class="btn-secondary"><i class="fa-solid fa-arrow-down"></i> Agregar a la lista</button>
+                </div>
+            </section>
+
+            <section class="widget table-widget">
+                <div class="task-header">
+                    <h3><i class="fa-solid fa-list-check"></i> Tareas por cargar</h3>
+                    <div class="task-counter">Total: <span id="counter-display">0</span></div>
+                </div>
+                
+                <div class="table-responsive">
+                    <table class="projects-table">
+                        <thead>
+                            <tr>
+                                <th>Proyecto Asignado</th>
+                                <th>Descripción de la Tarea</th>
+                                <th>Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tasks-tbody">
+                            </tbody>
+                    </table>
+                </div>
+
+                <div class="submit-container">
+                    <button id="submit-tasks-btn" class="btn-primary"><i class="fa-solid fa-cloud-arrow-up"></i> Cargar Tareas a la Base de Datos</button>
+                </div>
+            </section>
+
+            <footer class="app-footer">
+                <div class="footer-content">
+                    <p><i class="fa-regular fa-copyright"></i> 2026 Fundación Para el Desarrollo de la Ciencia y la Tecnología (FUNDACITE)</p>
+                    <div class="footer-images">
+                        <img src="../Recursos/Logo1.png" alt="logo_onstitucional_1">
+                        <img src="../Recursos/Logo2.png" alt="Logo Institucional 2" class="logo_secundario">
+                    </div>
+                </div>
+            </footer>
+        </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="script.js"></script>
+</body>
+</html>

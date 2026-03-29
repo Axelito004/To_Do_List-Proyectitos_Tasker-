@@ -1,0 +1,552 @@
+:root {
+    --bg-color: #f4f7f6;
+    --sidebar-bg: #ffffff;
+    --widget-bg: #ffffff;
+    --text-main: #2d3436;
+    --text-muted: #636e72;
+    --accent: #0984e3;
+    --border-radius: 16px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    min-height: 100vh; /* Ocupa al menos toda la pantalla, pero puede crecer */
+    height: auto;
+    overflow-x: hidden; /* Evita scroll horizontal accidental */
+    overflow-y: auto; /* Permite el scroll vertical natural */
+    margin: 0;
+}
+
+.app-container {
+    min-height: 100vh;
+    display: flex;
+}
+
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow: visible; /* Dejamos que el contenido fluya */
+}
+
+
+/* --- Barra Lateral --- */
+.sidebar {
+    width: 250px;
+    background-color: var(--sidebar-bg);
+    padding: 2rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid #e1e5e9;
+}
+
+.logo h2 {
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 1rem;
+}
+
+.user-profile {
+    margin-bottom: 2.5rem;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #e1e5e9;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.menu a {
+    text-decoration: none;
+    color: var(--text-muted);
+    font-weight: 400;
+    padding: 0.8rem 1rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.menu a:hover, .menu a.active {
+    background-color: var(--accent);
+    color: white;
+}
+
+/* --- Contenido Principal --- */
+.main-content {
+    flex: 1;
+    padding: 2rem 3rem;
+    overflow-y: auto;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2.5rem;
+}
+
+.time-widget {
+    font-size: 1.5rem;
+    font-weight: 600;
+    background: var(--widget-bg);
+    padding: 0.5rem 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+}
+
+/* --- Cuadrícula Principal --- */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto; 
+    grid-gap: 1.5rem;
+}
+
+.widget {
+    background-color: var(--widget-bg);
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    display: flex;
+    flex-direction: column;
+}
+
+.widget h3 {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Columna 1 */
+.projects-widget { grid-column: 1; grid-row: 1 / 3; }
+/* Columna 2 */
+.notes-widget { grid-column: 2; grid-row: 1; }
+.saved-notes-widget { grid-column: 2; grid-row: 2; }
+/* Columna 3 */
+.calendar-widget { grid-column: 3; grid-row: 1; }
+.news-widget { grid-column: 3; grid-row: 2; }
+
+/* --- Lista de Proyectos --- */
+#projects-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+#projects-list li {
+    padding: 1rem;
+    background-color: var(--bg-color);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    border-left: 4px solid var(--accent);
+}
+
+/* --- Notas (Escribir) --- */
+.notes-widget textarea {
+    flex: 1;
+    min-height: 100px;
+    border: none;
+    resize: none;
+    background-color: var(--bg-color);
+    padding: 1rem;
+    border-radius: 8px;
+    outline: none;
+    color: var(--text-main);
+    margin-bottom: 1rem;
+}
+
+#save-note-btn {
+    background-color: var(--accent);
+    color: white;
+    border: none;
+    padding: 0.8rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+
+#save-note-btn:hover {
+    background-color: #076ab5;
+}
+
+/* --- Notas Guardadas --- */
+.saved-notes-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+.saved-note {
+    background-color: var(--bg-color);
+    padding: 1rem;
+    border-radius: 8px;
+    border-left: 4px solid #f1c40f;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+/* =========================================
+   CONTADOR DE CARACTERES Y BORRAR NOTAS
+========================================= */
+
+.note-input-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+}
+
+.note-input-container textarea {
+    margin-bottom: 0.4rem; /* Reducimos el margen para acercar el contador */
+}
+
+.char-counter {
+    text-align: right;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+.char-counter.limit {
+    color: #e74c3c; /* Se pone rojo cuando llega al límite */
+}
+
+/* Modificamos la nota guardada para que el texto y el botón de borrar convivan */
+.saved-note {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
+    background-color: var(--bg-color);
+    padding: 1rem;
+    border-radius: 8px;
+    border-left: 4px solid #f1c40f;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.note-text {
+    flex: 1; /* El texto ocupa el espacio principal */
+    word-break: break-word; /* Evita que palabras largas rompan el diseño */
+}
+
+.delete-note-btn {
+    background: none;
+    border: none;
+    color: #e74c3c;
+    cursor: pointer;
+    opacity: 0.5; /* Se ve atenuado para no distraer */
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    padding: 2px 5px;
+}
+
+.delete-note-btn:hover {
+    opacity: 1; /* Brilla en rojo al pasar el mouse */
+    transform: scale(1.1);
+}
+
+/* --- Calendario Mini --- */
+.calendar-widget {
+    text-align: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--accent), #74b9ff);
+    color: white;
+}
+
+.calendar-widget h3 { color: white; margin-bottom: 0.5rem; justify-content: center; }
+.calendar-date { font-size: 4rem; font-weight: 600; line-height: 1; }
+.calendar-day-name { font-size: 1.2rem; text-transform: uppercase; letter-spacing: 2px; margin-top: 1rem; }
+
+/* --- Noticias Verticales --- */
+.news-container-vertical {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+.news-item {
+    background-color: var(--bg-color);
+    padding: 1rem;
+    border-radius: 8px;
+    border-left: 4px solid var(--accent);
+}
+
+/* --- FOOTER INSTITUCIONAL --- */
+.app-footer {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e1e5e9;
+    color: var(--text-muted);
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.footer-content p {
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.footer-images {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.footer-images img {
+    height: 65px;
+    width: auto;
+    object-fit: contain;
+    align-items: right;
+    
+    /* --- EL TRUCO PARA EL BORDE NEGRO EN PNG BLANCO --- */
+    /* Creamos una sombra negra muy dura de 1px en todas direcciones */
+    filter: drop-shadow(1px 0 0 var(--accent)) 
+            drop-shadow(-1px 0 0 var(--accent)) 
+            drop-shadow(0 1px 0 var(--accent)) 
+            drop-shadow(0 -1px 0 var(--accent));
+            
+    opacity: 0.35; /* Ligeramente transparente por defecto */
+    transition: all 0.3s ease;
+}
+
+.footer-images img.logo_secundario {
+    height: 200px;
+    align-items: right;
+}
+
+.footer-images img:hover {
+    opacity: 1; /* Totalmente opaco al pasar el mouse */
+    /* Opcional: podrías quitar el borde al hacer hover */
+    /* filter: none; */
+}
+
+.news-item h4 { font-size: 0.9rem; margin-bottom: 0.5rem; color: var(--text-main); }
+.news-item p { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.5rem; }
+.news-item small { font-size: 0.75rem; color: var(--accent); font-weight: 600; }
+
+/* =========================================
+ENLACES DE NOTICIAS
+========================================= */
+
+.news-link {
+    color: var(--text-main);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.news-link:hover {
+    color: var(--accent); /* Se pinta de azul al pasar el mouse */
+}
+
+/* =========================================
+   CONTROL DE TAMAÑO Y SCROLLBARS MINIMALISTAS
+========================================= */
+
+/* 1. Límites estrictos para los contenedores de listas */
+#projects-list {
+    max-height: 450px; /* Evita que la columna izquierda crezca infinitamente */
+    overflow-y: auto;
+    padding-right: 8px; /* Deja espacio para que el scroll no tape el texto */
+}
+
+.saved-notes-container, 
+.news-container-vertical {
+    max-height: 250px; /* Mantiene la altura de las cajas centrales y derechas */
+    overflow-y: auto;
+    padding-right: 8px;
+}
+
+/* 2. Diseño personalizado de la barra de desplazamiento (Webkit: Chrome, Edge, Safari) */
+::-webkit-scrollbar {
+    width: 6px; /* Hace la barra muy delgadita */
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent; /* Fondo invisible */
+}
+
+::-webkit-scrollbar-thumb {
+    background: #c1c9d2; /* Un gris sutil para la barrita */
+    border-radius: 10px; /* Bordes redondeados */
+    transition: background 0.3s;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent); /* Se pinta de tu color azul al pasar el mouse */
+}
+
+/* Diseño para Firefox (tiene su propio estándar) */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #c1c9d2 transparent;
+}
+
+/* =========================================
+PERFIL DE USUARIO Y CERRAR SESIÓN
+========================================= */
+
+/* Para que el perfil se vaya al fondo, asegúrate de que tu .sidebar tenga esto:
+   display: flex; flex-direction: column; justify-content: space-between; */
+.sidebar-footer {
+    margin-top: auto; /* Empuja esto hacia abajo */
+    padding-top: 1rem;
+    border-top: 1px solid #e1e5e9;
+    position: relative;
+}
+
+.user-profile-bottom {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.user-profile-bottom:hover {
+    background-color: #f0f4f8;
+}
+
+.avatar-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%; /* Lo hace un círculo perfecto */
+    background-color: #e1e5e9;
+    object-fit: cover;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    flex: 1; /* Ocupa el espacio restante */
+    overflow: hidden;
+}
+
+.user-info strong {
+    font-size: 0.9rem;
+    color: var(--text-main);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.user-info span {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.user-profile-bottom i {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+}
+
+/* El menú flotante oculto por defecto */
+.logout-menu {
+    display: none; /* Se oculta con CSS y se muestra con JS */
+    position: absolute;
+    bottom: 70px; /* Sube por encima del perfil */
+    left: 0;
+    width: 100%;
+    background: white;
+    border: 1px solid #e1e5e9;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    overflow: hidden;
+    z-index: 100;
+}
+
+.logout-menu.show {
+    display: block; /* Clase para activarlo */
+}
+
+#btn-logout {
+    width: 100%;
+    background: transparent;
+    border: none;
+    padding: 12px 15px;
+    text-align: left;
+    color: #e74c3c; /* Rojo alerta */
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: background 0.2s;
+}
+
+#btn-logout:hover {
+    background: #fdf3f2;
+}
+
+/* =========================================
+   EFECTO HOVER INTERACTIVO EN WIDGETS (CORREGIDO)
+========================================= */
+
+/* 1. Estado BASE del Widget */
+/* Solo agregamos la animación, SIN tocar tus fondos ni tus colores */
+.widget,
+.notes-widget,
+.news-widget,
+.calendar-widget,
+.projects-widget {
+    /* Le decimos que los cambios de tamaño y sombra durarán 0.3 segundos */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    
+    /* Preparamos el terreno para que la tarjeta pueda "flotar" sobre las demás */
+    position: relative; 
+    z-index: 1; 
+    
+    /* Filtros anti-temblores para que las letras no se pongan borrosas al moverse */
+    backface-visibility: hidden; 
+    -webkit-font-smoothing: antialiased;
+}
+
+/* 2. Estado HOVER (Cuando pasas el mouse por encima) */
+.widget:hover,
+.notes-widget:hover,
+.news-widget:hover,
+.calendar-widget:hover,
+.projects-widget:hover {
+    /* La acercamos hacia la pantalla (aumenta 3% su tamaño) */
+    transform: scale(1.03); 
+    
+    /* Hacemos la sombra más grande y oscura para dar profundidad */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); 
+    
+    /* Traemos la tarjeta al nivel máximo del frente para que no choque con nada */
+    z-index: 10; 
+}

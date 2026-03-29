@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modificar Tareas | To Do List</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="../Recursos/favicon_io/favicon-32x32.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo">
+                <h2><i class="fa-solid fa-check-double"></i> Proyectitos-Tasker</h2>
+            </div>
+            <div class="user-profile">
+         
+            </div>
+            <nav class="menu">
+                <a href="../Dashboard/index.html"><i class="fa-solid fa-house"></i> Dashboard</a>
+                <a href="../Proyectos/index.html"><i class="fa-solid fa-folder"></i> Proyectos</a>
+                <a href="../Tareas/index.html"><i class="fa-solid fa-list-ul"></i> Tareas</a>
+                <a href="../Visualizar/index.html"><i class="fa-solid fa-eye"></i> Visualizar Proyectos</a>
+                <a href="index.html" class="active"><i class="fa-solid fa-pencil"></i> Modificar Tarea</a>
+                <a href="../Sobre_Mi/index.html"><i class="fa-solid fa-user-astronaut"></i> Sobre mí</a>
+<div class="sidebar-footer">
+            <div class="user-profile-bottom" id="user-profile-btn">
+                <img src="" alt="Avatar del usuario" id="user-avatar" class="avatar-img">
+                <div class="user-info">
+                    <strong id="user-name">Cargando...</strong>
+                    <span id="user-username">@usuario</span>
+                </div>
+                <i class="fa-solid fa-chevron-up"></i>
+            </div>
+            
+            <div class="logout-menu" id="logout-menu">
+                <button id="btn-logout">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i> Cerrar Sesión
+                </button>
+            </div>
+        </div>
+
+            </nav>
+        </aside>
+        </aside>
+
+        <main class="main-content">
+            <header>
+                <h1>Modificar Registro</h1>
+            </header>
+
+            <section class="widget edit-form-widget">
+                <div class="form-row">
+                    <div class="input-group" style="flex: 1;">
+                        <label for="edit-project-select"><i class="fa-solid fa-magnifying-glass"></i> Buscar Proyecto a modificar</label>
+                        <select id="edit-project-select" class="custom-select">
+                            <option value="">-- Selecciona un proyecto para cargar sus datos --</option>
+                            </select>
+                    </div>
+                </div>
+
+                <div id="edit-panel" style="display: none;">
+                    <hr class="divider">
+                    
+                    <h3 class="section-title"><i class="fa-regular fa-calendar"></i> Fechas del Proyecto</h3>
+                    <div class="form-row dates-row">
+                        <div class="input-group">
+                            <label for="edit-start-date">Fecha de Inicio (Inmodificable)</label>
+                            <input type="date" id="edit-start-date" disabled class="input-disabled"> 
+                        </div>
+                        <div class="input-group">
+                            <label for="edit-end-date">Fecha de Culminación (Modificable)</label>
+                            <input type="date" id="edit-end-date">
+                        </div>
+                    </div>
+
+                    <h3 class="section-title"><i class="fa-solid fa-list-check"></i> Modificar Tareas</h3>
+                    <div id="edit-tasks-container" class="edit-tasks-list">
+                        </div>
+
+                    <div class="submit-container" style="justify-content: flex-start; padding: 1.5rem 0 0 0; background: none; border: none;">
+                        <button id="save-modifications-btn" class="btn-primary"><i class="fa-solid fa-floppy-disk"></i> Guardar modificación</button>
+                    </div>
+                </div>
+            </section>
+
+            <footer class="app-footer">
+                <div class="footer-content">
+                    <p><i class="fa-regular fa-copyright"></i> 2026 Fundación Para el Desarrollo de la Ciencia y la Tecnología (FUNDACITE)</p>
+                    <div class="footer-images">
+                        <img src="../Recursos/Logo1.png" alt="logo_onstitucional_1">
+                        <img src="../Recursos/Logo2.png" alt="Logo Institucional 2" class="logo_secundario">
+                    </div>
+                </div>
+            </footer>
+        </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="script.js"></script>
+</body>
+</html>

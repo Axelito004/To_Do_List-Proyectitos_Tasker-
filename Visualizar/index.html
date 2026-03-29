@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualizar Proyectos | To Do List</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="../Recursos/favicon_io/favicon-32x32.png">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo">
+                <h2><i class="fa-solid fa-check-double"></i> Proyectitos-Tasker</h2>
+            </div>
+            <div class="user-profile">
+            </div>
+            <nav class="menu">
+                <a href="../Dashboard/index.html"><i class="fa-solid fa-house"></i> Dashboard</a>
+                <a href="../Proyectos/index.html"><i class="fa-solid fa-folder"></i> Proyectos</a>
+                <a href="../Tareas/index.html"><i class="fa-solid fa-list-ul"></i> Tareas</a>
+                <a href="index.html" class="active"><i class="fa-solid fa-eye"></i> Visualizar Proyectos</a>
+                <a href="../Modifcar/index.html"><i class="fa-solid fa-pencil"></i> Modificar Tarea</a>
+                <a href="../Sobre_Mi/index.html"><i class="fa-solid fa-user-astronaut"></i> Sobre mí</a>
+                <div class="sidebar-footer">
+            <div class="user-profile-bottom" id="user-profile-btn">
+                <img src="" alt="Avatar del usuario" id="user-avatar" class="avatar-img">
+                <div class="user-info">
+                    <strong id="user-name">Cargando...</strong>
+                    <span id="user-username">@usuario</span>
+                </div>
+                <i class="fa-solid fa-chevron-up"></i>
+            </div>
+            
+            <div class="logout-menu" id="logout-menu">
+                <button id="btn-logout">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i> Cerrar Sesión
+                </button>
+            </div>
+        </div>
+
+            </nav>
+        </aside>
+</aside>
+        <main class="main-content">
+            <header>
+                <h1>Progreso de Proyectos</h1>
+            </header>
+
+            <section class="widget accordion-widget">
+                <div id="projects-accordion" class="accordion-container">
+                    </div>
+                
+                <div class="update-container">
+                    <button id="btn_actualizar_proyecto" class="btn-primary"><i class="fa-solid fa-floppy-disk"></i> Actualizar Proyectos</button>
+                </div>
+            </section>
+
+            <footer class="app-footer">
+                <div class="footer-content">
+                    <p><i class="fa-regular fa-copyright"></i> 2026 Fundación Para el Desarrollo de la Ciencia y la Tecnología (FUNDACITE)</p>
+                    <div class="footer-images">
+                        <img src="../Recursos/Logo1.png" alt="logo_onstitucional_1">
+                        <img src="../Recursos/Logo2.png" alt="Logo Institucional 2" class="logo_secundario">
+                    </div>
+                </div>
+            </footer>
+        </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="script.js"></script>
+</body>
+</html>
