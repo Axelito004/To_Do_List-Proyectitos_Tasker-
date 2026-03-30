@@ -144,7 +144,6 @@ async function fetchVisualizacion() {
         else fondoTarjeta = 'linear-gradient(135deg, #dcfce7 0%, #86efac 100%)';
 
         // --- EXTRACCIÓN Y LIMPIEZA DE FECHAS ---
-        // Cortamos la hora ('T') para dejar solo el formato AAAA-MM-DD
         const fechaInicio = proj.fecha_inicio ? proj.fecha_inicio.split('T')[0] : 'No definida';
         const fechaFin = proj.fecha_fin ? proj.fecha_fin.split('T')[0] : 'No definida';
 
@@ -176,7 +175,7 @@ async function fetchVisualizacion() {
                     <div><i class="fa-regular fa-calendar-check" style="color: #e74c3c; margin-right: 5px;"></i> <strong>Culminación:</strong> ${fechaFin}</div>
                 </div>
 
-                <div style="padding: 20px 25px;">
+                <div class="tareas-scroll" style="padding: 20px 25px; max-height: 350px; overflow-y: auto;">
                     ${tareas.length === 0 ? '<p style="color:#64748b; font-size:1rem; font-style: italic;">No hay tareas asignadas.</p>' : ''}
                     
                     ${tareas.map(t => `
